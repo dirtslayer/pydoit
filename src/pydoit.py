@@ -9,7 +9,7 @@ import os, sys, calendar
 import db, prefs, buttonbuilder
 import listpicker
 import tasklistbuilder
-
+import datetime
 
 #Comment the first line and uncomment the second before installing
 #or making the tarball (alternatively, use project variables)
@@ -19,6 +19,8 @@ UI_FILE = "./pydoit.ui"
 class GUI:
 	hb = Gtk.HeaderBar()
 	dbx = db.db()
+
+	
 
 	def __init__(self):
 
@@ -30,7 +32,7 @@ class GUI:
 
 		menu = self.builder.get_object('menubar1')
 		self.hb.add(menu)
-	
+		self.last_button = None
 		self.on_calendar1_day_selected (None)
 
 		window = self.builder.get_object('pydoitWindow')
@@ -55,8 +57,39 @@ class GUI:
 
 		self.tlx = self.tlb.get_tasklist_from_tasklists(self.tll,self.current_list)
 
-		
+		ad = datetime.date.today()
+		cal = self.builder.get_object('calendar1')
+		result = cal.select_month(ad.month - 1, ad.year)
+		cal.select_day(ad.day)
+		tasks = self.dbx.get_tasks_on_date_inlist(self.current_list,int(ad.day),int(ad.month) - 1,int(ad.year))
+		for rows in tasks:
+			for t in rows:
+				self.add_label(t)
+		mlbl = self.builder.get_object('msglabel')
+		mlbl.set_label(' \n')
 
+	def on_calendar1_day_selected(self,window):
+		self.set_header_title()
+		self.listbox_remove_all()
+		yearx, monthx, dayx = self.get_date_from_cal ()
+		tasks = self.dbx.get_tasks_on_date_inlist(self.current_list,int(dayx),int(monthx),int(yearx))
+		for rows in tasks:
+			for t in rows:
+				self.add_label(t)
+
+		mlbl = self.builder.get_object('msglabel')
+		mlbl.set_label(' \n')
+
+		if self.last_button != None:	
+			cal = self.builder.get_object('calendar1')
+			yearx,monthx,dayx = self.get_date_from_cal ()
+			cal.clear_marks()		
+			daysx = self.dbx.get_days_in_month_task_was_done(self.current_list,self.last_button,monthx,yearx)
+		
+			for d in daysx:
+				cal.mark_day(d)
+		
+		
 	def get_date_from_cal(self):
 		cal = self.builder.get_object('calendar1')
 		year,month,day = cal.get_date()
@@ -71,8 +104,6 @@ class GUI:
 		" " + str(day) + ", " + str(year)
 		window.set_titlebar(self.hb)
 		window.show_all()
-		
-	
 
 	def listbox_remove_all(self):
 		listbox = self.builder.get_object('listbox1')
@@ -80,17 +111,6 @@ class GUI:
 		for x in c:
 			listbox.remove(x)			
 		listbox.show_all()
-
-	def on_calendar1_day_selected(self,window):
-		self.set_header_title()
-		self.listbox_remove_all()
-		datestring = "%s-%s-%s" %  self.get_date_from_cal ()
-		tasks = self.dbx.get_tasks_on_date_inlist(self.current_list,datestring)
-		for rows in tasks:
-			for t in rows:
-				self.add_label(t)
-		mlbl = self.builder.get_object('msglabel')
-		mlbl.set_label('')
 	
 	def label_check(self,text):
 		listbox = self.builder.get_object('listbox1')
@@ -129,31 +149,47 @@ class GUI:
 			labelobj = boxchildren.pop()
 			text = labelobj.get_label()
 
-			datestring = "%s-%s-%s" %  self.get_date_from_cal ()
-			self.dbx.delete_task_from_date_inlist(self.current_list,datestring,text)
+			yearx,monthx,dayx = self.get_date_from_cal ()
+			self.dbx.delete_task_from_date_inlist(self.current_list,int(dayx),int(monthx),int(yearx),text)
 			
 			box.remove(row)
 			box.show_all()
 		return True
 
 	def do_button(self,window):
-		text = window.get_label()
-		if self.label_check(text) == True:
-			return
-		self.add_label(text)
-		datestring = "%s-%s-%s" %  self.get_date_from_cal ()
-		self.dbx.insert_into_inlist(self.current_list,text,datestring)
 
+		# use button label to find the task
+		text = window.get_label()
 		self.tlx = self.tlb.get_tasklist_from_tasklists(self.tll,self.current_list)
-		#print(self.tlx)
 		taskx = self.tlx.find_task(text)
+		# play the sound
 		sndfile = taskx.sound
 		os.system(prefs.play_sound_cmd % (sndfile))
-		
+		# display the message
 		mlbl = self.builder.get_object('msglabel')
 		mlbl.set_label(taskx.text)
 		
+		cal = self.builder.get_object('calendar1')
+		yearx,monthx,dayx = self.get_date_from_cal ()
+
+		# if the label isnt already in the list of things done on that day add to db
+		if self.label_check(text) == False:
+			self.add_label(text)
+			self.dbx.insert_into_inlist(self.current_list,text,int(dayx),int(monthx),int(yearx))
+
+		
+		# show all the days in the current month that have had this task done
+		# cal.mark_day(int day)
+		# if month hasnt changed and last button wasnt the same ... (for now we will always do this)
 	
+		cal.clear_marks()		
+		daysx = self.dbx.get_days_in_month_task_was_done(self.current_list,text,monthx,yearx)
+		for d in daysx:
+			cal.mark_day(d)
+		self.last_button = text
+		
+	def on_imagemenuitem5_activate(self,window):
+		Gtk.main_quit()
 
 	def on_imagemenuitem1_activate(self,window):
 		dialog = self.builder.get_object('dialog1')

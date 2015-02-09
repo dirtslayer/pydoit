@@ -15,7 +15,9 @@ class tasklistbuilder:
 		
 			tasklists.append(newtasklist)
 
-			taskfolders = os.listdir(folder + tl)
+			with open(folder + tl + os.sep + tl + ".txt","r") as orderfile:
+				taskfolders = orderfile.read().splitlines() 
+
 			
 			for t in taskfolders:
 

@@ -1,19 +1,4 @@
-# -*- Mode: Python; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- #
-# kidslistDB.py
-# Copyright (C) 2015 Unknown <darrell@designr8.com>
-#
-# kidslist is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# kidslist is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License along
-# with this program.  If not, see <http://www.gnu.org/licenses/>.
+# -*- Mode: Python; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -
 import sqlite3
 import prefs
 
@@ -28,25 +13,35 @@ class db():
 		
 	def create_tables(self):
 		cmd = """create table if not exists tasks( listname varchar(255),
-			task varchar(255), date varchar(255)
+			task varchar(255), day integer, month integer, year integer
 			)"""
 		self.cursor.execute(cmd)	
 		return True
 
-	def insert_into_inlist(self,listname,task,date):
-		cmd = "insert into tasks values ('%s','%s','%s')" % (listname, task , date)
+	def insert_into_inlist(self,listname,task,day,month,year):
+		cmd = "insert into tasks values ('%s','%s','%s','%s','%s')" % (listname, task , day,month,year)
 		self.cursor.execute(cmd)	
 		self.db.commit()
 		return True
+	
+	def get_days_in_month_task_was_done(self,listname,task,month,year):
+		cmd = "select day from tasks where listname='%s' and month='%s' and year='%s' and task='%s'" % (listname,month,year,task)
+		self.cursor.execute(cmd)
+		rows = self.cursor.fetchall()
+		# returns first column packed in tuple so unpack it
+		column=[elt[0] for elt in rows]
+		return column
+		
 
-	def delete_task_from_date_inlist(self,listname,date,task):
-		cmd = "delete from tasks where listname='%s' and date='%s' and task='%s'" % (listname, date , task)
+	def delete_task_from_date_inlist(self,listname,day,month,year,task):
+		cmd = "delete from tasks where listname='%s' and day='%s' and month='%s' and year='%s' and task='%s'" % (listname, day, month, year , task)
+		
 		self.cursor.execute(cmd)
 		self.db.commit()
 		return True
 
-	def get_tasks_on_date_inlist(self,inlist,date):
-		cmd = "select task from tasks where listname='%s' and date='%s'" % (inlist,date)
+	def get_tasks_on_date_inlist(self,inlist,day,month,year):
+		cmd = "select task from tasks where listname='%s' and day='%s' and month='%s' and year='%s'" % (inlist,day,month,year)
 		self.cursor.execute(cmd)
 		rows = self.cursor.fetchall()
 		return rows

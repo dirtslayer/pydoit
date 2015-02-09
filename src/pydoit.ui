@@ -222,10 +222,11 @@
                               <object class="GtkListBox" id="listbox1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="vexpand">True</property>
                                 <signal name="row-activated" handler="on_listbox1_row_activated" swapped="no"/>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
+                                <property name="expand">True</property>
                                 <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
@@ -236,7 +237,7 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
@@ -377,9 +378,11 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="xalign">0.46000000834465027</property>
+            <property name="xpad">10</property>
             <property name="ypad">3</property>
             <property name="label" translatable="yes">msglabel</property>
             <property name="justify">fill</property>
+            <property name="wrap">True</property>
             <property name="angle">0.080000000000000002</property>
           </object>
           <packing>
