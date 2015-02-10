@@ -17,15 +17,15 @@ $ python pydoit.py
 
 ## how to install
 
-.configure 
-make
-make install
+$ ./configure 
+$ make
+$ make install
 
 ## how to review the code
 
-.py - python source code
-.ui - glade user interface design files (xml)
-.db - database files (saved user data)
+-.py - python source code
+-.ui - glade user interface design files (xml)
+-.db - database files (saved user data)
 
 
 ## how to make lists
