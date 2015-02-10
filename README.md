@@ -6,7 +6,7 @@ requires
 
 ## concept
 
-pydoit all started when i took a parenting course. there was one really usefull idea from that course for my kids which was a task list for the critical times where its the same thing everyday but they still needed reminding to keep them on task. the other idea, which is a pain in the ass, is a reward chart. so the original task lists that where where plastic task cards with velcro on the back. the rewards charts would be ugly grid on the fidge (with stickers of course). double wow. pydoit replaces the functionality of both these systems. each day that you do a task list, you record that you did that task.
+pydoit all started when i took a parenting course. there was one really usefull idea from that course for my kids which was a task list for the critical times where its the same thing everyday but they still needed reminding to keep them on task. the other idea, which is a pain in the ass, is a reward chart. so the original task lists where plastic task cards with velcro on the back. the rewards charts would be ugly grid on the fidge (with stickers of course). double wow. pydoit replaces the functionality of both these systems. each day that you do a task list, you record that you did that task.
 
 ## how to run without installing
 
