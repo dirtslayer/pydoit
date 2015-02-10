@@ -6,5 +6,5 @@ db_folder = "./db/"
 user = "pydoit"
 
 lists_folder = "./lists/"
-start_list = "bedtime"
+start_list = "feelings"
 
