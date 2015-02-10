@@ -16,27 +16,23 @@ after that, open a shell and find the src folder.
 $ python pydoit.py
 
 ## how to install
-
+...
 $ ./configure 
 $ make
 $ make install
+...
 
-## how to review the code
+## review the code in src
 
--.py - python source code
--.ui - glade user interface design files (xml)
--.db - database files (saved user data)
-
+- .py - python source code
+- .ui - glade user interface design files (xml)
+- .db - database files (saved user data)
 
 ## how to make lists
 
 the lists are not stored in a database, but in a folder heirarchy with all the text sound and images - plus one file to specify order of the tasks
 
 the python file prefs.py has a variable called lists_folder, the lists_folder variable is the root folder for all the task lists available. 
-
-## apologies
-
-i am sorry
 
 ## thank you
 
