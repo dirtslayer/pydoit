@@ -1,0 +1,9 @@
+creeper
+skeleton
+spider
+zombie
+chicken
+enderman
+zombie pigman
+cow
+

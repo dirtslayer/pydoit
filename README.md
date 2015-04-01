@@ -1,8 +1,12 @@
 # pydoit
 task board desktop application.
 
-requires
- python. pygtk. sqlite3.
+built on
+- python 3.4.2-2 
+- pygtk 2.24.0-5
+- sqlite 3.8.8.2-1
+
+this program has never been tested see copyleft
 
 ## concept
 
