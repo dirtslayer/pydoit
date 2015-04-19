@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Pydoit by semisided1</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Pydoit</h1>
+        <p>task board desktop application. python. pygtk. sqlite3.</p>
+
+        <p class="view"><a href="https://github.com/semisided1/pydoit">View the Project on GitHub <small>semisided1/pydoit</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/semisided1/pydoit/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/semisided1/pydoit/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/semisided1/pydoit">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="pydoit" class="anchor" href="#pydoit" aria-hidden="true"><span class="octicon octicon-link"></span></a>pydoit</h1>
+
+<p>task board desktop application.</p>
+
+<p>built on</p>
+
+<ul>
+<li>python 3.4.2-2 </li>
+<li>pygtk 2.24.0-5</li>
+<li>sqlite 3.8.8.2-1</li>
+</ul>
+
+<p>this program has never been tested see copyleft</p>
+
+<h2>
+<a id="concept" class="anchor" href="#concept" aria-hidden="true"><span class="octicon octicon-link"></span></a>concept</h2>
+
+<p>pydoit all started when i took a parenting course. there was one really usefull idea from that course for my kids which was a task list for the critical times where its the same thing everyday but they still needed reminding to keep them on task. the other idea, which is a pain in the ass, is a reward chart. so the original task lists where plastic task cards with velcro on the back. the rewards charts would be ugly grid on the fidge (with stickers of course). double wow. pydoit replaces the functionality of both these systems. each day that you do a task list, you record that you did that task.</p>
+
+<h2>
+<a id="how-to-run-without-installing" class="anchor" href="#how-to-run-without-installing" aria-hidden="true"><span class="octicon octicon-link"></span></a>how to run without installing</h2>
+
+<p>you will have to install pygtk and sqlite3. 
+after that, open a shell and find the src folder.</p>
+
+<p>$ python pydoit.py</p>
+
+<h2>
+<a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>how to install</h2>
+
+<p>...
+$ ./configure 
+$ make
+$ make install
+...</p>
+
+<h2>
+<a id="review-the-code-in-src" class="anchor" href="#review-the-code-in-src" aria-hidden="true"><span class="octicon octicon-link"></span></a>review the code in src</h2>
+
+<ul>
+<li>.py - python source code</li>
+<li>.ui - glade user interface design files (xml)</li>
+<li>.db - database files (saved user data)</li>
+</ul>
+
+<h2>
+<a id="how-to-make-lists" class="anchor" href="#how-to-make-lists" aria-hidden="true"><span class="octicon octicon-link"></span></a>how to make lists</h2>
+
+<p>the lists are not stored in a database, but in a folder heirarchy with all the text sound and images - plus one file to specify order of the tasks</p>
+
+<p>the python file prefs.py has a variable called lists_folder, the lists_folder variable is the root folder for all the task lists available. </p>
+
+<h2>
+<a id="thank-you" class="anchor" href="#thank-you" aria-hidden="true"><span class="octicon octicon-link"></span></a>thank you</h2>
+
+<p>thank you for all the free software</p>
+
+<h2>
+<a id="copyleft" class="anchor" href="#copyleft" aria-hidden="true"><span class="octicon octicon-link"></span></a>copyleft</h2>
+
+<p>see the file named COPYING for the copyleft</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/semisided1">semisided1</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
